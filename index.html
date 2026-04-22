@@ -35,15 +35,25 @@
         }
 
         nav {
-            position: fixed; top: 0; width: 100%; height: 52px;
-            background: var(--nav-bg); backdrop-filter: blur(20px);
-            z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.1);
-            display: flex; align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 52px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
         }
 
         .nav-container {
-            max-width: 1100px; margin: 0 auto; width: 100%;
-            display: flex; justify-content: space-between; padding: 0 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
         }
 
         .control-btn {
@@ -57,14 +67,44 @@
             text-align: right;
         }
 
-        .hero { padding-top: 120px; text-align: center; padding-bottom: 50px; }
-        .app-icon { width: 120px; height: 120px; border-radius: 24px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .hero h1 { font-size: 56px; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
-        .hero p { font-size: 24px; color: var(--secondary-text); margin: 15px 0 30px; }
+        .hero {
+            padding-top: 120px;
+            text-align: center;
+            padding-bottom: 50px;
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: var(--secondary-text);
+            margin: 15px 0 30px;
+        }
+
         .download-btn {
-            display: inline-flex; align-items: center; background-color: var(--text-color);
-            color: var(--bg-color); padding: 14px 32px; border-radius: 980px;
-            text-decoration: none; font-weight: 600; font-size: 20px; gap: 12px;
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            padding: 14px 32px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 20px;
+            gap: 12px;
         }
 
         .carousel-wrapper {
@@ -81,6 +121,8 @@
             scroll-behavior: smooth;
             scroll-snap-type: x mandatory;
             justify-content: flex-start;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
         .carousel::-webkit-scrollbar { display: none; }
@@ -94,27 +136,62 @@
             flex-shrink: 0;
             object-fit: cover;
             scroll-snap-align: center;
+            scroll-snap-stop: always;
         }
 
-        .section-container { max-width: 1100px; margin: 80px auto; padding: 0 20px; }
+        .section-container {
+            max-width: 1100px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
         .features {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
         }
-        .feature-card { background: var(--card-bg); padding: 35px; border-radius: 24px; }
-        .feature-card h3 { margin-top: 0; font-size: 22px; }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 24px;
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+            font-size: 22px;
+        }
 
         .review-item {
-            background: var(--card-bg); padding: 30px; border-radius: 24px;
-            margin-bottom: 25px; display: flex; align-items: flex-start; gap: 25px;
-            text-align: left; width: 100%;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 24px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+            text-align: left;
+            width: 100%;
         }
-        .avatar { width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0; }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
         .review-content { flex-grow: 1; }
         .stars { color: #ffcc00; margin-bottom: 8px; }
         .username { display: block; margin-top: 10px; font-weight: 700; color: var(--text-color); }
 
-        footer { background: var(--card-bg); padding: 80px 20px; text-align: center; margin-top: 100px; }
+        footer {
+            background: var(--card-bg);
+            padding: 80px 20px;
+            text-align: center;
+            margin-top: 100px;
+        }
+
         .support-section { margin-bottom: 50px; }
         .support-text { font-size: 22px; font-weight: 700; color: var(--text-color); margin-bottom: 12px; }
         .mail-link { font-size: 22px; font-weight: 700; color: var(--accent-orange); text-decoration: none; }
@@ -124,10 +201,7 @@
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 38px; }
-            .carousel {
-                justify-content: flex-start;
-                padding: 20px calc(50% - 140px);
-            }
+            .carousel { padding: 20px calc(50% - 140px); }
             .review-item { flex-direction: column; text-align: center; align-items: center; }
             .support-text, .mail-link { font-size: 18px; }
         }
@@ -155,12 +229,12 @@
 </section>
 
 <div class="carousel-wrapper">
-    <div class="carousel">
-        <img src="en-1.jpg" class="screenshot" alt="App screenshot 1">
-        <img src="en-2.jpg" class="screenshot" alt="App screenshot 2">
-        <img src="en-3.jpg" class="screenshot" alt="App screenshot 3">
-        <img src="en-4.jpg" class="screenshot" alt="App screenshot 4">
-        <img src="en-5.jpg" class="screenshot" alt="App screenshot 5">
+    <div class="carousel" id="carousel">
+        <img src="image/en-1.jpg" class="screenshot" alt="App screenshot 1">
+        <img src="image/en-2.jpg" class="screenshot" alt="App screenshot 2">
+        <img src="image/en-3.jpg" class="screenshot" alt="App screenshot 3">
+        <img src="image/en-4.jpg" class="screenshot" alt="App screenshot 4">
+        <img src="image/en-5.jpg" class="screenshot" alt="App screenshot 5">
     </div>
 </div>
 
@@ -197,7 +271,7 @@
     <h2 id="revTitle" style="text-align: center; margin-bottom: 40px;">What Users Say</h2>
 
     <div class="review-item">
-        <img src="https://i.pravatar.cc/150?u=sarah" class="avatar">
+        <img src="https://i.pravatar.cc/150?u=sarah" class="avatar" alt="Sarah avatar">
         <div class="review-content">
             <div class="stars">★★★★★</div>
             <p id="rev1">"Finally! One app that actually opens my CSV and JSON files correctly on iPad. It's become my daily driver for work."</p>
@@ -206,7 +280,7 @@
     </div>
 
     <div class="review-item">
-        <img src="https://i.pravatar.cc/150?u=mark" class="avatar">
+        <img src="https://i.pravatar.cc/150?u=mark" class="avatar" alt="Mark avatar">
         <div class="review-content">
             <div class="stars">★★★★★</div>
             <p id="rev2">"The fastest PDF renderer I've used. Clean, simple, and most importantly, no annoying ads or constant popups."</p>
@@ -215,7 +289,7 @@
     </div>
 
     <div class="review-item">
-        <img src="https://i.pravatar.cc/150?u=david" class="avatar">
+        <img src="https://i.pravatar.cc/150?u=david" class="avatar" alt="David avatar">
         <div class="review-content">
             <div class="stars">★★★★★</div>
             <p id="rev3">"Great for reading EPUBs and Markdown files. I love that it doesn't try to upload my sensitive docs to a random server."</p>
@@ -240,44 +314,67 @@
 <script>
     let isZH = false;
     let isDark = false;
-    let carouselTimer;
+    let carouselTimer = null;
+    let carouselIndex = 0;
 
     function toggleTheme() {
         isDark = !isDark;
-        document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
-        document.getElementById('themeBtn').innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        document.body.setAttribute("data-theme", isDark ? "dark" : "light");
+        document.getElementById("themeBtn").innerHTML = isDark
+            ? '<i class="fas fa-sun"></i>'
+            : '<i class="fas fa-moon"></i>';
     }
 
     const d = {
         en: {
-            title: "All Docs Reader", sub: "One App. Every File. Total Control.", dl: "Download on App Store",
-            f1T: "📂 All-in-One Viewer", f1D: "Support PDF, Word, Excel, PPT, EPUB, and rich text formats.",
-            f2T: "⚡ Lightning Fast", f2D: "Engineered for speed. Open large documents with zero lag.",
-            f3T: "🛡️ Privacy First", f3D: "100% local processing. Your files never leave your device.",
-            f4T: "🎬 Multimedia Ready", f4D: "View images and play audio or video files directly.",
-            f5T: "📝 Quick Edit", f5D: "Make instant updates to TXT, Markdown, and Code files.",
-            f6T: "🪶 Ultra Lightweight", f6D: "A powerful tool in a small package. Minimal storage impact.",
+            title: "All Docs Reader",
+            sub: "One App. Every File. Total Control.",
+            dl: "Download on App Store",
+            f1T: "📂 All-in-One Viewer",
+            f1D: "Support PDF, Word, Excel, PPT, EPUB, and rich text formats.",
+            f2T: "⚡ Lightning Fast",
+            f2D: "Engineered for speed. Open large documents with zero lag.",
+            f3T: "🛡️ Privacy First",
+            f3D: "100% local processing. Your files never leave your device.",
+            f4T: "🎬 Multimedia Ready",
+            f4D: "View images and play audio or video files directly.",
+            f5T: "📝 Quick Edit",
+            f5D: "Make instant updates to TXT, Markdown, and Code files.",
+            f6T: "🪶 Ultra Lightweight",
+            f6D: "A powerful tool in a small package. Minimal storage impact.",
             revTitle: "What Users Say",
-            rev1: '"Finally! One app that actually opens my CSV and JSON files correctly on iPad. It\\'s become my daily driver for work."',
-            rev2: '"The fastest PDF renderer I\\'ve used. Clean, simple, and most importantly, no annoying ads or constant popups."',
-            rev3: '"Great for reading EPUBs and Markdown files. I love that it doesn\\'t try to upload my sensitive docs to a random server."',
+            rev1: "\"Finally! One app that actually opens my CSV and JSON files correctly on iPad. It's become my daily driver for work.\"",
+            rev2: "\"The fastest PDF renderer I've used. Clean, simple, and most importantly, no annoying ads or constant popups.\"",
+            rev3: "\"Great for reading EPUBs and Markdown files. I love that it doesn't try to upload my sensitive docs to a random server.\"",
             sup: "Have questions? Contact our Support Team",
-            p: "Privacy Policy", t: "Terms of Service", langBtn: "English"
+            p: "Privacy Policy",
+            t: "Terms of Service",
+            langBtn: "English"
         },
         zh: {
-            title: "全能文档阅读器", sub: "一个 APP，打开所有文件。", dl: "前往 App Store 下载",
-            f1T: "📂 全格式兼容", f1D: "支持 PDF, Word, Excel, PPT, EPUB 及各类富文本格式。",
-            f2T: "⚡ 极速体验", f2D: "专为速度而生。秒开大文件，流畅翻页无卡顿。",
-            f3T: "🛡️ 隐私至上", f3D: "100% 本地处理。您的文件绝不会离开您的设备或 iCloud。",
-            f4T: "🎬 多媒体支持", f4D: "无需切换应用，直接预览图片、播放音频与视频。",
-            f5T: "📝 快速编辑", f5D: "内置编辑器，支持即时修改 TXT、Markdown 和代码文件。",
-            f6T: "🪶 极致轻量", f6D: "功能强大但体积精简，不占用多余的存储空间。",
+            title: "全能文档阅读器",
+            sub: "一个 APP，打开所有文件。",
+            dl: "前往 App Store 下载",
+            f1T: "📂 全格式兼容",
+            f1D: "支持 PDF, Word, Excel, PPT, EPUB 及各类富文本格式。",
+            f2T: "⚡ 极速体验",
+            f2D: "专为速度而生。秒开大文件，流畅翻页无卡顿。",
+            f3T: "🛡️ 隐私至上",
+            f3D: "100% 本地处理。您的文件绝不会离开您的设备或 iCloud。",
+            f4T: "🎬 多媒体支持",
+            f4D: "无需切换应用，直接预览图片、播放音频与视频。",
+            f5T: "📝 快速编辑",
+            f5D: "内置编辑器，支持即时修改 TXT、Markdown 和代码文件。",
+            f6T: "🪶 极致轻量",
+            f6D: "功能强大但体积精简，不占用多余的存储空间。",
             revTitle: "用户好评",
             rev1: "“终于！有一个应用能在 iPad 上正确打开我的 CSV 和 JSON 文件了。它已成为我工作的必备工具。”",
             rev2: "“这是我用过最快的 PDF 渲染器。干净、简单，最重要的是没有恼人的广告和弹窗。”",
             rev3: "“非常适合阅读 EPUB 和 Markdown 文件。我很喜欢它不会把我的敏感文档上传到随机服务器这一点。”",
             sup: "有问题？欢迎联系我们的支持团队",
-            p: "隐私政策", t: "服务条款", langBtn: "简体中文"
+            p: "隐私政策",
+            t: "服务条款",
+            langBtn: "简体中文"
         }
     };
 
@@ -285,54 +382,72 @@
         isZH = !isZH;
         const lang = isZH ? d.zh : d.en;
 
-        document.getElementById('heroTitle').innerText = lang.title;
-        document.getElementById('heroSub').innerText = lang.sub;
-        document.getElementById('dlText').innerText = lang.dl;
-        document.getElementById('f1T').innerText = lang.f1T; document.getElementById('f1D').innerText = lang.f1D;
-        document.getElementById('f2T').innerText = lang.f2T; document.getElementById('f2D').innerText = lang.f2D;
-        document.getElementById('f3T').innerText = lang.f3T; document.getElementById('f3D').innerText = lang.f3D;
-        document.getElementById('f4T').innerText = lang.f4T; document.getElementById('f4D').innerText = lang.f4D;
-        document.getElementById('f5T').innerText = lang.f5T; document.getElementById('f5D').innerText = lang.f5D;
-        document.getElementById('f6T').innerText = lang.f6T; document.getElementById('f6D').innerText = lang.f6D;
-        document.getElementById('revTitle').innerText = lang.revTitle;
-        document.getElementById('rev1').innerText = lang.rev1;
-        document.getElementById('rev2').innerText = lang.rev2;
-        document.getElementById('rev3').innerText = lang.rev3;
-        document.getElementById('supT').innerText = lang.sup;
-        document.getElementById('linkP').innerText = lang.p;
-        document.getElementById('linkT').innerText = lang.t;
-        document.getElementById('langBtn').innerText = lang.langBtn;
+        document.getElementById("heroTitle").innerText = lang.title;
+        document.getElementById("heroSub").innerText = lang.sub;
+        document.getElementById("dlText").innerText = lang.dl;
+        document.getElementById("f1T").innerText = lang.f1T;
+        document.getElementById("f1D").innerText = lang.f1D;
+        document.getElementById("f2T").innerText = lang.f2T;
+        document.getElementById("f2D").innerText = lang.f2D;
+        document.getElementById("f3T").innerText = lang.f3T;
+        document.getElementById("f3D").innerText = lang.f3D;
+        document.getElementById("f4T").innerText = lang.f4T;
+        document.getElementById("f4D").innerText = lang.f4D;
+        document.getElementById("f5T").innerText = lang.f5T;
+        document.getElementById("f5D").innerText = lang.f5D;
+        document.getElementById("f6T").innerText = lang.f6T;
+        document.getElementById("f6D").innerText = lang.f6D;
+        document.getElementById("revTitle").innerText = lang.revTitle;
+        document.getElementById("rev1").innerText = lang.rev1;
+        document.getElementById("rev2").innerText = lang.rev2;
+        document.getElementById("rev3").innerText = lang.rev3;
+        document.getElementById("supT").innerText = lang.sup;
+        document.getElementById("linkP").innerText = lang.p;
+        document.getElementById("linkT").innerText = lang.t;
+        document.getElementById("langBtn").innerText = lang.langBtn;
+    }
+
+    function scrollToCard(index, behavior) {
+        const cards = document.querySelectorAll(".carousel .screenshot");
+        if (!cards.length) return;
+
+        cards[index].scrollIntoView({
+            behavior: behavior,
+            inline: "center",
+            block: "nearest"
+        });
     }
 
     function startCarousel() {
-        const carousel = document.querySelector('.carousel');
-        if (!carousel) return;
+        const cards = document.querySelectorAll(".carousel .screenshot");
+        if (!cards.length) return;
 
         clearInterval(carouselTimer);
         carouselTimer = setInterval(() => {
-            const item = carousel.querySelector('.screenshot');
-            if (!item) return;
-
-            const step = item.offsetWidth + 25;
-            const nextLeft = carousel.scrollLeft + step;
-            const maxLeft = carousel.scrollWidth - carousel.clientWidth;
-
-            if (nextLeft >= maxLeft) {
-                carousel.scrollTo({ left: 0, behavior: 'smooth' });
-            } else {
-                carousel.scrollTo({ left: nextLeft, behavior: 'smooth' });
-            }
+            carouselIndex = (carouselIndex + 1) % cards.length;
+            scrollToCard(carouselIndex, "smooth");
         }, 2500);
     }
 
-    const carousel = document.querySelector('.carousel');
-    if (carousel) {
-        carousel.addEventListener('mouseenter', () => clearInterval(carouselTimer));
-        carousel.addEventListener('mouseleave', startCarousel);
-        carousel.addEventListener('touchstart', () => clearInterval(carouselTimer), { passive: true });
-        carousel.addEventListener('touchend', startCarousel, { passive: true });
-        startCarousel();
+    function stopCarousel() {
+        clearInterval(carouselTimer);
+        carouselTimer = null;
     }
+
+    window.addEventListener("load", () => {
+        const carousel = document.getElementById("carousel");
+        const cards = document.querySelectorAll(".carousel .screenshot");
+        if (!carousel || !cards.length) return;
+
+        scrollToCard(0, "auto");
+
+        carousel.addEventListener("mouseenter", stopCarousel);
+        carousel.addEventListener("mouseleave", startCarousel);
+        carousel.addEventListener("touchstart", stopCarousel, { passive: true });
+        carousel.addEventListener("touchend", startCarousel, { passive: true });
+
+        startCarousel();
+    });
 </script>
 </body>
 </html>
