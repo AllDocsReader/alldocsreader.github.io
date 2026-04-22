@@ -58,10 +58,10 @@
             text-decoration: none; font-weight: 600; font-size: 20px; gap: 12px;
         }
 
-        .carousel-wrapper { margin: 50px 0; overflow: hidden; display: none; }
-        .carousel { display: flex; gap: 25px; padding: 20px; overflow-x: auto; scroll-behavior: smooth; justify-content: center; }
+        .carousel-wrapper { margin: 50px 0; overflow: hidden; display: block; }
+        .carousel { display: flex; gap: 25px; padding: 20px; overflow-x: auto; scroll-behavior: smooth; justify-content: flex-start; }
         .carousel::-webkit-scrollbar { display: none; }
-        .screenshot { width: 280px; height: 600px; background: #2c2c2e; border-radius: 40px; border: 8px solid #333; flex-shrink: 0; }
+        .screenshot { width: 280px; height: 600px; background: #2c2c2e; border-radius: 40px; border: 8px solid #333; flex-shrink: 0; object-fit: cover; }
 
         .section-container { max-width: 1100px; margin: 80px auto; padding: 0 20px; }
         .features {
@@ -111,7 +111,7 @@
 </nav>
 
 <section class="hero">
-    <img src="app-icon.png" alt="App Icon" class="app-icon">
+    <img src="image/app-icon.png" alt="App Icon" class="app-icon">
     <h1 id="heroTitle">All Docs Reader</h1>
     <p id="heroSub">One App. Every File. Total Control.</p>
     <a href="https://apps.apple.com/us/app/all-docs-reader-all-in-one/id6762105367" class="download-btn">
@@ -121,10 +121,11 @@
 
 <div class="carousel-wrapper">
     <div class="carousel">
-        <img src="https://via.placeholder.com/280x600/1a1a1a/ffffff?text=PDF+Viewer" class="screenshot">
-        <img src="https://via.placeholder.com/280x600/1a1a1a/ffffff?text=Office+Docs" class="screenshot">
-        <img src="https://via.placeholder.com/280x600/1a1a1a/ffffff?text=E-Books" class="screenshot">
-        <img src="https://via.placeholder.com/280x600/1a1a1a/ffffff?text=File+Manager" class="screenshot">
+        <img src="image/en-1.jpg" class="screenshot" alt="App screenshot 1">
+        <img src="image/en-2.jpg" class="screenshot" alt="App screenshot 2">
+        <img src="image/en-3.jpg" class="screenshot" alt="App screenshot 3">
+        <img src="image/en-4.jpg" class="screenshot" alt="App screenshot 4">
+        <img src="image/en-5.jpg" class="screenshot" alt="App screenshot 5">
     </div>
 </div>
 
@@ -204,6 +205,7 @@
 <script>
     let isZH = false;
     let isDark = false;
+    let carouselTimer;
 
     function toggleTheme() {
         isDark = !isDark;
@@ -265,6 +267,35 @@
         document.getElementById('linkP').innerText = lang.p;
         document.getElementById('linkT').innerText = lang.t;
         document.getElementById('langBtn').innerText = lang.langBtn;
+    }
+
+    function startCarousel() {
+        const carousel = document.querySelector('.carousel');
+        if (!carousel) return;
+
+        clearInterval(carouselTimer);
+        carouselTimer = setInterval(() => {
+            const cardWidth = carousel.querySelector('.screenshot')?.offsetWidth || 280;
+            const gap = 25;
+            const nextLeft = carousel.scrollLeft + cardWidth + gap;
+            const maxLeft = carousel.scrollWidth - carousel.clientWidth;
+
+            if (nextLeft >= maxLeft) {
+                carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                return;
+            }
+
+            carousel.scrollTo({ left: nextLeft, behavior: 'smooth' });
+        }, 2500);
+    }
+
+    const carousel = document.querySelector('.carousel');
+    if (carousel) {
+        carousel.addEventListener('mouseenter', () => clearInterval(carouselTimer));
+        carousel.addEventListener('mouseleave', startCarousel);
+        carousel.addEventListener('touchstart', () => clearInterval(carouselTimer), { passive: true });
+        carousel.addEventListener('touchend', startCarousel, { passive: true });
+        startCarousel();
     }
 </script>
 </body>
