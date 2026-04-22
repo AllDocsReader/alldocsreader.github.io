@@ -442,6 +442,8 @@
     let isZH = false;
     let isDark = false;
     let carouselIndex = 0;
+    let carouselTimer = null;
+    const carouselInterval = 3000;
 
     function toggleTheme() {
         isDark = !isDark;
@@ -547,6 +549,25 @@
         });
     }
 
+    function stopAutoCarousel() {
+        clearInterval(carouselTimer);
+        carouselTimer = null;
+    }
+
+    function startAutoCarousel() {
+        const cards = document.querySelectorAll(".carousel .screenshot");
+        if (!cards.length) return;
+
+        stopAutoCarousel();
+        carouselTimer = setInterval(() => {
+            updateCarousel(carouselIndex + 1);
+        }, carouselInterval);
+    }
+
+    function restartAutoCarousel() {
+        startAutoCarousel();
+    }
+
     window.addEventListener("load", () => {
         const carousel = document.getElementById("carousel");
         const cards = document.querySelectorAll(".carousel .screenshot");
@@ -557,20 +578,33 @@
         if (!carousel || !cards.length) return;
 
         if (prevBtn) {
-            prevBtn.addEventListener("click", () => updateCarousel(carouselIndex - 1));
+            prevBtn.addEventListener("click", () => {
+                updateCarousel(carouselIndex - 1);
+                restartAutoCarousel();
+            });
         }
 
         if (nextBtn) {
-            nextBtn.addEventListener("click", () => updateCarousel(carouselIndex + 1));
+            nextBtn.addEventListener("click", () => {
+                updateCarousel(carouselIndex + 1);
+                restartAutoCarousel();
+            });
         }
 
         dots.forEach((dot) => {
             dot.addEventListener("click", () => {
                 updateCarousel(Number(dot.dataset.index));
+                restartAutoCarousel();
             });
         });
 
+        carousel.addEventListener("mouseenter", stopAutoCarousel);
+        carousel.addEventListener("mouseleave", startAutoCarousel);
+        carousel.addEventListener("touchstart", stopAutoCarousel, { passive: true });
+        carousel.addEventListener("touchend", startAutoCarousel, { passive: true });
+
         updateCarousel(0);
+        startAutoCarousel();
     });
 </script>
 </body>
