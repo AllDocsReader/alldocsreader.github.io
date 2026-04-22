@@ -46,7 +46,16 @@
             display: flex; justify-content: space-between; padding: 0 20px;
         }
 
-        .control-btn { background: none; border: none; color: var(--text-color); cursor: pointer; font-size: 14px; font-weight: 500; width: 100px; text-align: right; }
+        .control-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            width: 100px;
+            text-align: right;
+        }
 
         .hero { padding-top: 120px; text-align: center; padding-bottom: 50px; }
         .app-icon { width: 120px; height: 120px; border-radius: 24px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
@@ -58,10 +67,34 @@
             text-decoration: none; font-weight: 600; font-size: 20px; gap: 12px;
         }
 
-        .carousel-wrapper { margin: 50px 0; overflow: hidden; display: block; }
-        .carousel { display: flex; gap: 25px; padding: 20px; overflow-x: auto; scroll-behavior: smooth; justify-content: flex-start; }
+        .carousel-wrapper {
+            margin: 50px 0;
+            overflow: hidden;
+            display: block;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 25px;
+            padding: 20px calc(50% - 140px);
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            justify-content: flex-start;
+        }
+
         .carousel::-webkit-scrollbar { display: none; }
-        .screenshot { width: 280px; height: 600px; background: #2c2c2e; border-radius: 40px; border: 8px solid #333; flex-shrink: 0; object-fit: cover; }
+
+        .screenshot {
+            width: 280px;
+            height: 600px;
+            background: #2c2c2e;
+            border-radius: 40px;
+            border: 8px solid #333;
+            flex-shrink: 0;
+            object-fit: cover;
+            scroll-snap-align: center;
+        }
 
         .section-container { max-width: 1100px; margin: 80px auto; padding: 0 20px; }
         .features {
@@ -71,7 +104,6 @@
         .feature-card { background: var(--card-bg); padding: 35px; border-radius: 24px; }
         .feature-card h3 { margin-top: 0; font-size: 22px; }
 
-        /* Review Item Layout */
         .review-item {
             background: var(--card-bg); padding: 30px; border-radius: 24px;
             margin-bottom: 25px; display: flex; align-items: flex-start; gap: 25px;
@@ -92,7 +124,10 @@
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 38px; }
-            .carousel { justify-content: flex-start; }
+            .carousel {
+                justify-content: flex-start;
+                padding: 20px calc(50% - 140px);
+            }
             .review-item { flex-direction: column; text-align: center; align-items: center; }
             .support-text, .mail-link { font-size: 18px; }
         }
@@ -121,11 +156,11 @@
 
 <div class="carousel-wrapper">
     <div class="carousel">
-        <img src="en-1.jpg" class="screenshot" alt="App screenshot 1">
-        <img src="en-2.jpg" class="screenshot" alt="App screenshot 2">
-        <img src="en-3.jpg" class="screenshot" alt="App screenshot 3">
-        <img src="en-4.jpg" class="screenshot" alt="App screenshot 4">
-        <img src="en-5.jpg" class="screenshot" alt="App screenshot 5">
+        <img src="image/en-1.jpg" class="screenshot" alt="App screenshot 1">
+        <img src="image/en-2.jpg" class="screenshot" alt="App screenshot 2">
+        <img src="image/en-3.jpg" class="screenshot" alt="App screenshot 3">
+        <img src="image/en-4.jpg" class="screenshot" alt="App screenshot 4">
+        <img src="image/en-5.jpg" class="screenshot" alt="App screenshot 5">
     </div>
 </div>
 
@@ -223,9 +258,9 @@
             f5T: "📝 Quick Edit", f5D: "Make instant updates to TXT, Markdown, and Code files.",
             f6T: "🪶 Ultra Lightweight", f6D: "A powerful tool in a small package. Minimal storage impact.",
             revTitle: "What Users Say",
-            rev1: '"Finally! One app that actually opens my CSV and JSON files correctly on iPad. It\'s become my daily driver for work."',
-            rev2: '"The fastest PDF renderer I\'ve used. Clean, simple, and most importantly, no annoying ads or constant popups."',
-            rev3: '"Great for reading EPUBs and Markdown files. I love that it doesn\'t try to upload my sensitive docs to a random server."',
+            rev1: '"Finally! One app that actually opens my CSV and JSON files correctly on iPad. It\\'s become my daily driver for work."',
+            rev2: '"The fastest PDF renderer I\\'ve used. Clean, simple, and most importantly, no annoying ads or constant popups."',
+            rev3: '"Great for reading EPUBs and Markdown files. I love that it doesn\\'t try to upload my sensitive docs to a random server."',
             sup: "Have questions? Contact our Support Team",
             p: "Privacy Policy", t: "Terms of Service", langBtn: "English"
         },
@@ -275,17 +310,18 @@
 
         clearInterval(carouselTimer);
         carouselTimer = setInterval(() => {
-            const cardWidth = carousel.querySelector('.screenshot')?.offsetWidth || 280;
-            const gap = 25;
-            const nextLeft = carousel.scrollLeft + cardWidth + gap;
+            const item = carousel.querySelector('.screenshot');
+            if (!item) return;
+
+            const step = item.offsetWidth + 25;
+            const nextLeft = carousel.scrollLeft + step;
             const maxLeft = carousel.scrollWidth - carousel.clientWidth;
 
             if (nextLeft >= maxLeft) {
                 carousel.scrollTo({ left: 0, behavior: 'smooth' });
-                return;
+            } else {
+                carousel.scrollTo({ left: nextLeft, behavior: 'smooth' });
             }
-
-            carousel.scrollTo({ left: nextLeft, behavior: 'smooth' });
         }, 2500);
     }
 
