@@ -24,7 +24,10 @@
             --nav-bg: rgba(0, 0, 0, 0.8);
         }
 
-        * { box-sizing: border-box; transition: background-color 0.3s, color 0.3s; }
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -108,35 +111,74 @@
         }
 
         .carousel-wrapper {
-            margin: 50px 0;
-            overflow: hidden;
+            margin: 50px auto 0;
             display: block;
+            max-width: 430px;
+            padding: 0 20px;
+        }
+
+        .carousel-stage {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        .carousel-window {
+            width: 100%;
+            max-width: 320px;
+            overflow: hidden;
         }
 
         .carousel {
             display: flex;
-            gap: 25px;
-            padding: 20px calc(50% - 140px);
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scroll-snap-type: x mandatory;
-            justify-content: flex-start;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            transform: translateX(0);
+            transition: transform 0.45s ease;
         }
 
-        .carousel::-webkit-scrollbar { display: none; }
+        .carousel-nav {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 999px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
 
         .screenshot {
-            width: 280px;
-            height: 600px;
+            width: 100%;
+            max-width: 320px;
+            height: auto;
             background: #2c2c2e;
             border-radius: 40px;
             border: 8px solid #333;
-            flex-shrink: 0;
+            flex: 0 0 100%;
             object-fit: cover;
-            scroll-snap-align: center;
-            scroll-snap-stop: always;
+            display: block;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(29, 29, 31, 0.18);
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .carousel-dot.active {
+            background: var(--primary-blue);
         }
 
         .section-container {
@@ -181,9 +223,21 @@
             flex-shrink: 0;
         }
 
-        .review-content { flex-grow: 1; }
-        .stars { color: #ffcc00; margin-bottom: 8px; }
-        .username { display: block; margin-top: 10px; font-weight: 700; color: var(--text-color); }
+        .review-content {
+            flex-grow: 1;
+        }
+
+        .stars {
+            color: #ffcc00;
+            margin-bottom: 8px;
+        }
+
+        .username {
+            display: block;
+            margin-top: 10px;
+            font-weight: 700;
+            color: var(--text-color);
+        }
 
         footer {
             background: var(--card-bg);
@@ -192,18 +246,71 @@
             margin-top: 100px;
         }
 
-        .support-section { margin-bottom: 50px; }
-        .support-text { font-size: 22px; font-weight: 700; color: var(--text-color); margin-bottom: 12px; }
-        .mail-link { font-size: 22px; font-weight: 700; color: var(--accent-orange); text-decoration: none; }
-        .footer-links { margin-top: 40px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 25px; color: var(--secondary-text); }
-        .footer-links a { color: var(--primary-blue); text-decoration: none; font-size: 15px; margin: 0 10px; }
-        .divider { color: var(--secondary-text); opacity: 0.5; }
+        .support-section {
+            margin-bottom: 50px;
+        }
+
+        .support-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 12px;
+        }
+
+        .mail-link {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent-orange);
+            text-decoration: none;
+        }
+
+        .footer-links {
+            margin-top: 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding-top: 25px;
+            color: var(--secondary-text);
+        }
+
+        .footer-links a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-size: 15px;
+            margin: 0 10px;
+        }
+
+        .divider {
+            color: var(--secondary-text);
+            opacity: 0.5;
+        }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 38px; }
-            .carousel { padding: 20px calc(50% - 140px); }
-            .review-item { flex-direction: column; text-align: center; align-items: center; }
-            .support-text, .mail-link { font-size: 18px; }
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .carousel-wrapper {
+                max-width: 360px;
+            }
+
+            .carousel-stage {
+                gap: 10px;
+            }
+
+            .carousel-nav {
+                width: 36px;
+                height: 36px;
+            }
+
+            .review-item {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+
+            .support-text,
+            .mail-link {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -229,12 +336,32 @@
 </section>
 
 <div class="carousel-wrapper">
-    <div class="carousel" id="carousel">
-        <img src="en-1.jpg" class="screenshot" alt="App screenshot 1">
-        <img src="en-2.jpg" class="screenshot" alt="App screenshot 2">
-        <img src="en-3.jpg" class="screenshot" alt="App screenshot 3">
-        <img src="en-4.jpg" class="screenshot" alt="App screenshot 4">
-        <img src="en-5.jpg" class="screenshot" alt="App screenshot 5">
+    <div class="carousel-stage">
+        <button class="carousel-nav" id="prevBtn" aria-label="Previous screenshot">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="carousel-window">
+            <div class="carousel" id="carousel">
+                <img src="en-1.jpg" class="screenshot" alt="App screenshot 1">
+                <img src="en-2.jpg" class="screenshot" alt="App screenshot 2">
+                <img src="en-3.jpg" class="screenshot" alt="App screenshot 3">
+                <img src="en-4.jpg" class="screenshot" alt="App screenshot 4">
+                <img src="en-5.jpg" class="screenshot" alt="App screenshot 5">
+            </div>
+        </div>
+
+        <button class="carousel-nav" id="nextBtn" aria-label="Next screenshot">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <div class="carousel-dots">
+        <button class="carousel-dot active" data-index="0" aria-label="Go to screenshot 1"></button>
+        <button class="carousel-dot" data-index="1" aria-label="Go to screenshot 2"></button>
+        <button class="carousel-dot" data-index="2" aria-label="Go to screenshot 3"></button>
+        <button class="carousel-dot" data-index="3" aria-label="Go to screenshot 4"></button>
+        <button class="carousel-dot" data-index="4" aria-label="Go to screenshot 5"></button>
     </div>
 </div>
 
@@ -271,7 +398,7 @@
     <h2 id="revTitle" style="text-align: center; margin-bottom: 40px;">What Users Say</h2>
 
     <div class="review-item">
-        <img src="https://i.pravatar.cc/150?u=sarah" class="avatar" alt="Sarah avatar">
+        <img src="https://i.pravatar.cc/150?u=sarah" class="avatar">
         <div class="review-content">
             <div class="stars">★★★★★</div>
             <p id="rev1">"Finally! One app that actually opens my CSV and JSON files correctly on iPad. It's become my daily driver for work."</p>
@@ -280,7 +407,7 @@
     </div>
 
     <div class="review-item">
-        <img src="https://i.pravatar.cc/150?u=mark" class="avatar" alt="Mark avatar">
+        <img src="https://i.pravatar.cc/150?u=mark" class="avatar">
         <div class="review-content">
             <div class="stars">★★★★★</div>
             <p id="rev2">"The fastest PDF renderer I've used. Clean, simple, and most importantly, no annoying ads or constant popups."</p>
@@ -289,7 +416,7 @@
     </div>
 
     <div class="review-item">
-        <img src="https://i.pravatar.cc/150?u=david" class="avatar" alt="David avatar">
+        <img src="https://i.pravatar.cc/150?u=david" class="avatar">
         <div class="review-content">
             <div class="stars">★★★★★</div>
             <p id="rev3">"Great for reading EPUBs and Markdown files. I love that it doesn't try to upload my sensitive docs to a random server."</p>
@@ -314,7 +441,6 @@
 <script>
     let isZH = false;
     let isDark = false;
-    let carouselTimer = null;
     let carouselIndex = 0;
 
     function toggleTheme() {
@@ -407,46 +533,44 @@
         document.getElementById("langBtn").innerText = lang.langBtn;
     }
 
-    function scrollToCard(index, behavior) {
+    function updateCarousel(index) {
+        const carousel = document.getElementById("carousel");
         const cards = document.querySelectorAll(".carousel .screenshot");
-        if (!cards.length) return;
+        const dots = document.querySelectorAll(".carousel-dot");
+        if (!carousel || !cards.length) return;
 
-        cards[index].scrollIntoView({
-            behavior: behavior,
-            inline: "center",
-            block: "nearest"
+        carouselIndex = (index + cards.length) % cards.length;
+        carousel.style.transform = "translateX(-" + (carouselIndex * 100) + "%)";
+
+        dots.forEach((dot, dotIndex) => {
+            dot.classList.toggle("active", dotIndex === carouselIndex);
         });
-    }
-
-    function startCarousel() {
-        const cards = document.querySelectorAll(".carousel .screenshot");
-        if (!cards.length) return;
-
-        clearInterval(carouselTimer);
-        carouselTimer = setInterval(() => {
-            carouselIndex = (carouselIndex + 1) % cards.length;
-            scrollToCard(carouselIndex, "smooth");
-        }, 2500);
-    }
-
-    function stopCarousel() {
-        clearInterval(carouselTimer);
-        carouselTimer = null;
     }
 
     window.addEventListener("load", () => {
         const carousel = document.getElementById("carousel");
         const cards = document.querySelectorAll(".carousel .screenshot");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const dots = document.querySelectorAll(".carousel-dot");
+
         if (!carousel || !cards.length) return;
 
-        scrollToCard(0, "auto");
+        if (prevBtn) {
+            prevBtn.addEventListener("click", () => updateCarousel(carouselIndex - 1));
+        }
 
-        carousel.addEventListener("mouseenter", stopCarousel);
-        carousel.addEventListener("mouseleave", startCarousel);
-        carousel.addEventListener("touchstart", stopCarousel, { passive: true });
-        carousel.addEventListener("touchend", startCarousel, { passive: true });
+        if (nextBtn) {
+            nextBtn.addEventListener("click", () => updateCarousel(carouselIndex + 1));
+        }
 
-        startCarousel();
+        dots.forEach((dot) => {
+            dot.addEventListener("click", () => {
+                updateCarousel(Number(dot.dataset.index));
+            });
+        });
+
+        updateCarousel(0);
     });
 </script>
 </body>
